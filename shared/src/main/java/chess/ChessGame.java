@@ -259,7 +259,7 @@ public class ChessGame {
                }
            }
         }
-        return true;
+        return (!isInCheckmate(teamColor));
     }
 
     /**
