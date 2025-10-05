@@ -223,15 +223,35 @@ public class ChessGame {
         // TO DO
         // check if pieces can block the check
 
-//        new_board = Copy_Board();
-//        for (ChessMove move : )
+        // copy the board
+        // run through, find the valid moves for a piece
+        //      try valid moves on copy of board
+        //          check inCheck
+        //  if it's not in check anymore, return false
 
+        //run through, find pieces
+        for (int i=1; i < 9; i++){
+            for (int j=1; j < 9; j++) {
+                ChessPiece piece = board.getPiece(new ChessPosition(i, j));
+                if (piece != null && piece.getTeamColor() == teamColor) {
+                    //find valid moves
+                    var my_team_moves = validMoves(new ChessPosition(i, j));
+                    for (ChessMove move : my_team_moves) {
+                        //copy the board
+                        new_board = Copy_Board();
 
+                        //make move
+                        new_board.addPiece(move.getEndPosition(), piece);
+                        new_board.removePiece(move.getStartPosition());
 
-        // check if pieces can kill the pieces putting the king in check
-
-
-
+                        //check in check
+                        if (!Check_Helper(teamColor, new_board)){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
         return isInCheck(teamColor);
 
     }
