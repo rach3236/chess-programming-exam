@@ -214,7 +214,7 @@ public class ChessGame {
         }
 
         for (ChessMove king_move : king_poss_moves){
-            if (!enemy_check_moves.contains(king_move)) {
+            if (!enemy_check_moves.contains(king_move) && isInCheck(teamColor)) {
                 return false;
             }
         }
@@ -223,8 +223,8 @@ public class ChessGame {
         // TO DO
         // check if pieces can block the check
 
-        new_board = Copy_Board();
-        for (ChessMove move : )
+//        new_board = Copy_Board();
+//        for (ChessMove move : )
 
 
 
@@ -232,7 +232,7 @@ public class ChessGame {
 
 
 
-        return true;
+        return isInCheck(teamColor);
 
     }
 
@@ -246,7 +246,20 @@ public class ChessGame {
     public boolean isInStalemate(TeamColor teamColor) {
         // for every character piece on the board, any valid moves, return false;
         // if validMoves.size() != 0
-        return false;
+
+        boolean inCheck = isInCheck(teamColor);
+        for (int i=1; i < 9; i++) {
+           for (int j=1; j < 9; j++) {
+               ChessPiece piece = board.getPiece(new ChessPosition(i, j));
+               if (piece != null && piece.getTeamColor() == teamColor) {
+                   var valids = validMoves(new ChessPosition(i,j));
+                   if (valids.size() > 0 && !inCheck) {
+                       return false;
+                   }
+               }
+           }
+        }
+        return true;
     }
 
     /**
