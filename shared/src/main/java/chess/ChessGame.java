@@ -23,7 +23,6 @@ public class ChessGame {
         this.team = TeamColor.WHITE;
     }
 
-
     public ChessBoard Copy_Board() {
         ChessBoard new_board = new ChessBoard();
         for (int i = 1; i < 9; i++) {
@@ -73,7 +72,6 @@ public class ChessGame {
         }
         return false;
     }
-
 
     /**
      * @return Which team's turn it is
@@ -127,7 +125,6 @@ public class ChessGame {
                 }
             }
             return for_sure_valid;
-//        }
     }
 
     /**
@@ -162,10 +159,6 @@ public class ChessGame {
         } else {
             throw new InvalidMoveException();
         }
-
-
-        
-
     }
 
     /**
@@ -218,16 +211,6 @@ public class ChessGame {
                 return false;
             }
         }
-
-
-        // TO DO
-        // check if pieces can block the check
-
-        // copy the board
-        // run through, find the valid moves for a piece
-        //      try valid moves on copy of board
-        //          check inCheck
-        //  if it's not in check anymore, return false
 
         //run through, find pieces
         for (int i=1; i < 9; i++){
@@ -312,6 +295,4 @@ public class ChessGame {
     public int hashCode() {
         return Objects.hash(board, team, new_board);
     }
-
-
 }
